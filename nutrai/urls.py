@@ -13,4 +13,5 @@ urlpatterns = [
          TokenVerifyView.as_view(), name='token_verify'),
     path('api/', include('diet.urls')),
     path('api/', include('patient.urls')),
+    path('api/', include('plan.urls')),
 ]

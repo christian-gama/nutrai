@@ -14,4 +14,5 @@ INSTALLED_APPS = [
     # Own apps
     'diet',
     'patient',
+    'plan',
 ]
