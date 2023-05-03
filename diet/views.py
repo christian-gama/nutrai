@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from .models import Diet
 from .serializers import DietSerializer
-from .permissions import IsOwner
+from .permissions import DietPermission
 
 
 class DietViewSet(viewsets.ModelViewSet):
@@ -12,7 +12,7 @@ class DietViewSet(viewsets.ModelViewSet):
 
     queryset = Diet.objects.all()
     serializer_class = DietSerializer
-    permission_classes = [IsOwner]
+    permission_classes = [DietPermission]
 
     def get_queryset(self):
         return Diet.objects.filter(user=self.request.user)

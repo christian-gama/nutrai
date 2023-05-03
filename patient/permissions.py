@@ -2,6 +2,10 @@ from rest_framework import permissions
 
 
 class PatientPermission(permissions.BasePermission):
+    """
+    This class represents the permission to only allow owners of an object to edit it.
+    """
+
     def has_permission(self, request, view):
         if view.action in ['list', 'retrieve', 'create']:
             return True

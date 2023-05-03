@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  psql:
+    image: postgres:15.1-alpine
+    ports:
+      - $DATABASE_PORT:5432
+    environment:
+      POSTGRES_USER: $DATABASE_USER
+      POSTGRES_PASSWORD: $DATABASE_PASSWORD
+      POSTGRES_DB: $DATABASE_NAME
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    restart: always
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - PORT=$PORT
+    command: python manage.py runserver 0.0.0.0:$PORT
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - $PORT:$PORT
+    depends_on:
+      - psql
+    links:
+      - psql
+    restart: always
