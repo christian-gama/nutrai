@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator, MaxLengthValidator
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -44,9 +44,17 @@ class Diet(models.Model):
         (LOW_FAT, 'Low Fat'),
     ]
 
-    name = models.CharField(max_length=200)
-    description = models.TextField(max_length=500)
-    duration_in_weeks = models.IntegerField()
+    name = models.CharField(
+        max_length=150,
+        validators=[MaxLengthValidator(150)]
+    )
+    description = models.TextField(
+        max_length=500,
+        validators=[MaxLengthValidator(500)]
+    )
+    duration_in_weeks = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(500)]
+    )
     goals = models.CharField(max_length=50, choices=GOALS_CHOICES)
     allowed_foods = models.TextField()
     restricted_foods = models.TextField()
