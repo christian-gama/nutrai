@@ -1,16 +1,19 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth import get_user_model
 
-"""
-This class represents a Diet model, which includes information about a specific diet plan.
-It includes attributes such as the diet plan's name, description, duration, goals, allowed and
-restricted foods, meal plan, nutritional information and cost.
-This model can be used to represent any type of diet plan, such as a low-carb diet, vegan diet,
-or Mediterranean diet.
-"""
+User = get_user_model()
 
 
 class Diet(models.Model):
+    """
+    This class represents a Diet model, which includes information about a specific diet plan.
+    It includes attributes such as the diet plan's name, description, duration, goals, allowed and
+    restricted foods, meal plan, nutritional information and cost.
+    This model can be used to represent any type of diet plan, such as a low-carb diet, vegan diet,
+    or Mediterranean diet.
+    """
+
     # Define choices for goals
     WEIGHT_LOSS = 'weight_loss'
     MUSCLE_GAIN = 'muscle_gain'
@@ -52,6 +55,7 @@ class Diet(models.Model):
         max_length=50, choices=NUTRITIONAL_INFO_CHOICES)
     cost_in_usd = models.FloatField(
         validators=[MinValueValidator(0.0), MaxValueValidator(10000.0)])
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
