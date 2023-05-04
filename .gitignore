@@ -111,3 +111,6 @@ static_collected
 
 # Database
 db/
+
+# Misc
+output.txt

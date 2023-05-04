@@ -63,7 +63,7 @@ class Diet(models.Model):
         max_length=50, choices=NUTRITIONAL_INFO_CHOICES)
     cost_in_usd = models.FloatField(
         validators=[MinValueValidator(0.0), MaxValueValidator(10000.0)])
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

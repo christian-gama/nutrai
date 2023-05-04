@@ -1,3 +1,4 @@
+from django.db import DataError
 from django.forms import ValidationError
 from django.test import TestCase
 from django.contrib.auth.models import User
@@ -43,7 +44,7 @@ class DietModelTest(TestCase):
 
     def test_name_max_length(self):
         name = 'a' * 151
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(DataError):
             diet = self.make_diet(name=name)
             diet.full_clean()
 
