@@ -1,5 +1,6 @@
 Create a diet plan for a patient with the following details:
 
+Diet information:
 Duration in weeks: {{duration_in_weeks}}
 Goals: {{goals}}
 Allowed foods: {{allowed_foods}}
@@ -7,6 +8,11 @@ Restricted foods: {{restricted_foods}}
 Meal plan: {{meal_plan}}
 Nutritional info: {{nutritional_info}}
 Cost in USD: {{cost_in_usd}}
+
+Patient information:
+Age: {{age}}
+Height in meters: {{height}}
+Weight in kilograms: {{weight}}
 
 You must always follow the following template below. Always detail the quantity of each food item.
 ----------

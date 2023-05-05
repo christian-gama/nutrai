@@ -2,6 +2,7 @@ import os
 import openai
 
 from diet.models import Diet
+from patient.models import Patient
 
 from .models import Plan
 
@@ -9,7 +10,9 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 def generate_diet_plan(diet: Diet):
-    prompt = get_prompt(diet)
+    patient = Patient.objects.get(user=diet.user)
+
+    prompt = get_prompt(diet, patient)
 
     response = openai.Completion.create(
         engine="text-davinci-002",
@@ -30,7 +33,7 @@ def generate_diet_plan(diet: Diet):
     return planResponse
 
 
-def get_prompt(diet: Diet):
+def get_prompt(diet: Diet, patient: Patient):
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     with open(os.path.join(BASE_DIR, 'prompt.txt'), 'r') as f:
@@ -41,6 +44,9 @@ def get_prompt(diet: Diet):
             .replace('{{restricted_foods}}', diet.restricted_foods) \
             .replace('{{meal_plan}}', diet.meal_plan) \
             .replace('{{nutritional_info}}', diet.nutritional_info) \
-            .replace('{{cost_in_usd}}', str(diet.cost_in_usd))
+            .replace('{{cost_in_usd}}', str(diet.cost_in_usd)) \
+            .replace('{{age}}', str(patient.age)) \
+            .replace('{{height}}', str(patient.height_m)) \
+            .replace('{{weight}}', str(patient.weight_kg))
 
         return output
