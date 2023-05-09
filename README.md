@@ -2,6 +2,8 @@
 
 This project contains a Django web application that helps users manage their diet plans. The application is designed for nutritionists, who can create diet plans for their patients, and patients, who can view and follow the diet plans created for them.
 
+[API Documentation](https://documenter.getpostman.com/view/16405037/2s93eYWYSU)
+
 ## Project Structure
 
 The project is divided into three Django apps:
