@@ -18,9 +18,8 @@ To set up the project, follow these steps:
 
 1. Clone the repository.
 2. Create a virtual environment and activate it.
-3. Install the required packages using `pip install -r requirements.txt`.
-4. Set up the database by running `python manage.py makemigrations` and `python manage.py migrate`.
-5. Run the development server with `python manage.py runserver`.
+3. Set up the database by running `./scripts/migrate.sh`.
+4. Run the development server with `./scripts/run.sh`.
 
 ## Usage
 
@@ -35,5 +34,5 @@ The project exposes RESTful API endpoints for managing diet plans, patients, and
 ## Testing
 To run the tests for each app, run the following command:
 ```
-python manage.py test diet patient plan
+./scripts/test.sh
 ```
